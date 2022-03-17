@@ -1,6 +1,5 @@
 /* eslint-disable no-nested-ternary */
 import styled, { css } from 'styled-components';
-import ToolTip from '../ToolTip';
 import { ToolTipComponent } from '../ToolTip/style';
 
 interface ButtonProps {
