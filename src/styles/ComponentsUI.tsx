@@ -76,7 +76,7 @@ export const CheckBox = styled.label`
 export const Input = styled.input<InputProps>`
   border: 0;
   padding: 13px 22px;
-  width: -webkit-fill-available;
+  width: 100%;
   background: #fff;
   backdrop-filter: blur(15px);
   border-radius: 10px;

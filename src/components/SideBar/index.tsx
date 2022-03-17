@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { HiArrowLeft, HiMenu, HiPlus } from 'react-icons/hi';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Lottie from 'react-lottie-player';
+import { CSSTransition } from 'react-transition-group';
 import IconList from '../../assets/icons/list';
 import { Flex, Input, Text } from '../../styles/ComponentsUI';
 import Modal from '../Modal';
 import Button from '../Button';
-import { ListItems, NavBar, NavMobile } from './style';
+import { ListItems, NavBar, NavMobile, SideBarOverlay } from './style';
 import MessageToast from '../MessageToast';
 import ToolTip from '../ToolTip';
 
@@ -46,6 +47,18 @@ export default function SideBar() {
 
   return (
     <>
+      <CSSTransition
+        in={mobileMenu}
+        timeout={500}
+        classNames="modal-overlay"
+        unmountOnExit
+      >
+        <SideBarOverlay
+          onClick={() => {
+            setMobileMenu(false);
+          }}
+        />
+      </CSSTransition>
       <NavMobile>
         <Button
           variant="icon"
@@ -68,14 +81,16 @@ export default function SideBar() {
               />
             </Link>
             {mobileMenu && (
-              <Button
-                variant="icon"
-                onClick={() => {
-                  setMobileMenu(false);
-                }}
-              >
-                <HiArrowLeft />
-              </Button>
+              <>
+                <Button
+                  variant="icon"
+                  onClick={() => {
+                    setMobileMenu(false);
+                  }}
+                >
+                  <HiArrowLeft />
+                </Button>
+              </>
             )}
           </Flex>
           <Flex
@@ -119,7 +134,10 @@ export default function SideBar() {
             filteredData.map((item) => (
               <li
                 key={item}
-                onClick={() => navigate(`/list/${item}`)}
+                onClick={() => {
+                  navigate(`/list/${item}`);
+                  setMobileMenu(false);
+                }}
                 aria-hidden="true"
                 className={pathname === `/list/${item}` ? 'actived' : ''}
                 data-animation="fadeUp"

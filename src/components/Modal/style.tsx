@@ -24,8 +24,8 @@ export const ModalBody = styled.div<{ width?: string }>`
   position: absolute;
   z-index: 102;
   left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  top: 20%;
+  transform: translate(-50%, -20%);
   border-radius: 20px;
   padding: 20px;
   min-width: 300px;
